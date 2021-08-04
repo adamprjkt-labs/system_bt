@@ -70,10 +70,9 @@ interface IBluetoothGatt {
 
     void registerSync(in ScanResult scanResult, in int skip, in int timeout, in IPeriodicAdvertisingCallback callback);
     void unregisterSync(in IPeriodicAdvertisingCallback callback);
-    void transferSync(in BluetoothDevice bda, in int serviceData, in int syncHandle);
-    void transferSetInfo(in BluetoothDevice bda, in int serviceData, in int advertisingHandle, in IPeriodicAdvertisingCallback callback);
+
     @UnsupportedAppUsage
-    void registerClient(in ParcelUuid appId, in IBluetoothGattCallback callback, in boolean eattSupport);
+    void registerClient(in ParcelUuid appId, in IBluetoothGattCallback callback);
 
     @UnsupportedAppUsage
     void unregisterClient(in int clientIf);
@@ -102,7 +101,7 @@ interface IBluetoothGatt {
                             int maxInterval, int slaveLatency, int supervisionTimeout,
                             int minConnectionEventLen, int maxConnectionEventLen);
 
-    void registerServer(in ParcelUuid appId, in IBluetoothGattServerCallback callback, in boolean eattSupport);
+    void registerServer(in ParcelUuid appId, in IBluetoothGattServerCallback callback);
     void unregisterServer(in int serverIf);
     void serverConnect(in int serverIf, in String address, in boolean isDirect, in int transport);
     void serverDisconnect(in int serverIf, in String address);

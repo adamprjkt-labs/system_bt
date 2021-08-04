@@ -285,11 +285,10 @@ class BleScannerInterfaceImpl : public BleScannerInterface {
                                  jni_thread_wrapper(FROM_HERE, std::move(cb))));
   }
 
-  void SetScanParameters(int scan_phy, std::vector<uint32_t> scan_interval,
-                         std::vector<uint32_t> scan_window,
+  void SetScanParameters(int scan_interval, int scan_window,
                          Callback cb) override {
     do_in_main_thread(
-        FROM_HERE, base::Bind(&BTM_BleSetScanParams, scan_interval[0], scan_window[0],
+        FROM_HERE, base::Bind(&BTM_BleSetScanParams, scan_interval, scan_window,
                               BTM_BLE_SCAN_MODE_ACTI,
                               jni_thread_wrapper(FROM_HERE, std::move(cb))));
   }
@@ -331,14 +330,6 @@ class BleScannerInterfaceImpl : public BleScannerInterface {
                  SyncLostCb lost_cb) override {}
 
   void StopSync(uint16_t handle) override {}
-  void CancelCreateSync(uint8_t sid, RawAddress address) override {}
-  void TransferSync(RawAddress address, uint16_t service_data,
-                         uint16_t sync_handle, SyncTransferCb cb) override {}
-
-  void TransferSetInfo(RawAddress address, uint16_t service_data,
-                         uint8_t adv_handle, SyncTransferCb cb) override {}
-  void SyncTxParameters(RawAddress address, uint8_t mode, uint16_t skip,
-                         uint16_t timeout, StartSyncCb cb) override {}
 };
 
 BleScannerInterface* btLeScannerInstance = nullptr;
